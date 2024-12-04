@@ -71,7 +71,6 @@
             <div class="message bot-message">
               Hi there! How can I assist you today?
             </div>
-            <div class="message user-message"></div>
           </div>
           <!-- Input -->
           <div class="mx-3 row">
@@ -107,13 +106,14 @@
       function getContext() {
         const input = document.getElementById("inputContext");
         const button = document.getElementById("submitBtn");
+
         if (input) {
           passage = input.value.trim();
           addMessage("User provided context: " + passage, "user-message");
-          input.id = "inputMessage";
+          input.id = "inputMessage"; // change input ID for next question
           input.placeholder = "Input question...";
 
-          // Change the button's onclick dynamically
+          // Change button's onclick dynamically
           button.onclick = sendMessage;
         }
         input.value = ""; // Clear the input field
@@ -145,14 +145,17 @@
       }
 
       async function sendMessage() {
+        const button = document.getElementById("submitBtn");
         const input = document.getElementById("inputMessage");
         const messageText = input.value.trim();
-
-        button.disabled = true;
 
         if (messageText) {
           // Add user message
           addMessage(messageText, "user-message");
+
+          // Disable the button and change text to "Loading..."
+          button.disabled = true;
+          button.innerText = "Loading...";
 
           // Fetch the bot's response asynchronously
           const botResponse = await getAnswer(messageText);
@@ -160,9 +163,11 @@
 
           // Add bot response
           addMessage(botResponse, "bot-message");
-        }
 
-        button.disabled = false;
+          // Re-enable the button and change text back to "Submit"
+          button.disabled = false;
+          button.innerText = "Submit";
+        }
       }
 
       function addMessage(text, type) {
