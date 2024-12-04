@@ -90,7 +90,7 @@
               onclick="getContext()"
               id="submitBtn"
             >
-              Button
+              Submit
             </button>
           </div>
         </div>
@@ -148,6 +148,8 @@
         const input = document.getElementById("inputMessage");
         const messageText = input.value.trim();
 
+        button.disabled = true;
+
         if (messageText) {
           // Add user message
           addMessage(messageText, "user-message");
@@ -158,8 +160,9 @@
 
           // Add bot response
           addMessage(botResponse, "bot-message");
-
         }
+
+        button.disabled = false;
       }
 
       function addMessage(text, type) {
