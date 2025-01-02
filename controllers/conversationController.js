@@ -103,6 +103,12 @@ controller.getAnswer = async (req, res) => {
 
         await models.Message.create({
             conversation_id: req.params.conversation_id,
+            message: question,
+            sender: "user-message",
+        });
+
+        await models.Message.create({
+            conversation_id: req.params.conversation_id,
             message: response.data.answer,
             sender: "bot-message",
         });
