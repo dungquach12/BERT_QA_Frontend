@@ -1,0 +1,117 @@
+<!-- Sidebar -->
+<aside class="d-flex flex-column flex-shrink-0 p-3 border rounded toggled"
+  style="width: 280px; background-color: #fffaf0">
+  <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-black text-decoration-none">
+    <img src="/asset/img/logo.png" alt="" width="45" height="45" class="me-2">
+    <span class="fs-4" style="color: #09bc8a; font-weight: bold">
+      Poétesse
+    </span>
+  </a>
+  <hr />
+  <ul class="nav nav-pills flex-column mb-auto">
+    <li class="nav-item">
+      <div id="conversation-btn">
+        <div id="delete-btn" style="display: inline-block;">
+          <svg class="bi mb-1" xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+            class="bi bi-plus-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16" />
+            <path
+              d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+          </svg>
+        </div>
+        <div id="delete-btn" style="display: inline-block;">
+          <a href="/conversation" class="btn" role="button">
+            New conversation
+          </a>
+        </div>
+      </div>
+    </li>
+    {{#each conversations}}
+    <li class="nav-item">
+      <div id="conversation-btn">
+        <div id="delete-btn" style="display: inline-block;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+            class="bi bi-trash text-center" viewBox="0 0 16 16" data-conversation-id="{{conversation_id}}"
+            onclick="deleteConv(event)" id="deleteConv">
+            <path
+              d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />
+            <path
+              d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z" />
+          </svg>
+        </div>
+        <div id="navigate-btn" style="display: inline-block;">
+          <a href="/conversation/{{conversation_id}}" class="btn" role="button">
+            {{formatDate last_updated}}
+          </a>
+        </div>
+      </div>
+    </li>
+    {{/each}}
+  </ul>
+  <a class="btn text-danger mt-auto" href="/logout">
+    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-box-arrow-right"
+      viewBox="0 1 16 16">
+      <path fill-rule="evenodd"
+        d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0z" />
+      <path fill-rule="evenodd"
+        d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708z" />
+    </svg>
+    Logout
+  </a>
+</aside>
+
+<!-- Main Content -->
+<main class="container">
+  <div class="chat-container d-flex flex-column">
+    <!-- Chat -->
+    <div class="messages d-flex flex-column" id="messages">
+      <!-- Example Messages -->
+      <div class="message bot-message">
+        Hi there! How can I assist you today?
+      </div>
+    </div>
+    <!-- Input -->
+    <form id="inputContext-form" action="" method="POST">
+      <div class="mx-3 row">
+        <div class="col-10">
+          <textarea class="form-control" name="context" id="inputContext" rows="2" maxlength="500"
+            placeholder="Input context..."></textarea>
+        </div>
+        <div class="col-2">
+          <button class="btn btn-primary" id="submitBtn" type="submit" form="inputContext-form">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</main>
+
+<script>
+  /*
+  async function getContext() {
+    const input = document.getElementById("inputContext");
+    const button = document.getElementById("submitBtn");
+
+    try {
+      let passage = input.value.trim();
+      const response = await fetch(
+        "/conversation",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ context: passage }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+    } catch (error) {
+      console.error("Error:", error);
+    }
+  }
+  */
+</script>
