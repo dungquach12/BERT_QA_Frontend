@@ -14,10 +14,10 @@
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+    "username": "machine_learning_si8a_user",
+    "password": "AfyVLtgKsVjiXVrMdohw24pBbWOkb2h9",
+    "database": "machine_learning_si8a",
+    "host": "dpg-ctr29bggph6c73csueu0-a",
+    "dialect": "postgres"
   }
 }
