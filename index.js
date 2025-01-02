@@ -1,16 +1,14 @@
 require("dotenv").config();
-const path = require("path");
 const express = require("express");
 const app = express();
 const port = 3000;
 const expressHbs = require("express-handlebars");
 const session = require("express-session");
-const { where } = require("sequelize");
 
 const environment = process.env.NODE_ENV || "development";
 
 // Load the correct configuration based on the environment
-// const dbConfig = require("./config/config.json")[environment];
+const dbConfig = require("./config/config.json")[environment];
 
 // Configure static web folders
 app.use(express.static(__dirname + "/html"));
