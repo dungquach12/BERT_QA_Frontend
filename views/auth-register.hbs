@@ -1,0 +1,33 @@
+<main class="form-signin col-8 col-sm-7 col-md-6 col-lg-5 col-xl-4 mx-auto">
+    <form method="POST">
+        <div class="form-floating mt-4">
+            <a href="../../index.html"><img class="mt-4"
+                    src="/asset/img/logo.png"
+                    alt="EasyThread logo" width="72" height="57" /></a>
+            <h1 class="h3 mb-3">Sign up to EasyThread</h1>
+            <p class="mb-4 text-danger">{{message}}</p>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="email" name="email" class="form-control" id="floatingInput" placeholder="name@example.com"
+                required />
+            <label for="floatingInput">Email address</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="username" name="username" class="form-control" id="floatingTextarea" placeholder="Example"
+                required />
+            <label for="floatingInput">Username</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="password" name="password" class="form-control" id="floatingPassword" placeholder="Password"
+                pattern=".{8,}" title="Eight or more characters" required />
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button class="mt-4 w-100 btn btn-lg btn-dark" type="submit">
+            Confirm
+        </button>
+    </form>
+    <hr class="mt-4">
+    <div class="row mt-4">
+        <a href="/login" class="col text-start">Log in</a>
+    </div>
+</main>

@@ -1,0 +1,29 @@
+<main class="form-signin col-8 col-sm-7 col-md-6 col-lg-5 col-xl-4 mx-auto">
+    <form id="username-login-form" method="post" action="/login">
+        <div class="form-floating mt-4">
+            <a href=""><img class="mt-4"
+                    src="/asset/img/logo.png"
+                    alt="EasyThread logo" width="72" height="57"></a>
+            <h1 class="h3 mb-3">Log in to Poétesse</h1>
+            <p class="mb-4 text-danger">{{message}}</p>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="text" name="usernameOrEmail" class="form-control" placeholder="Your username or email"
+                required>
+            <label for="floatingInput">Username or email</label>
+        </div>
+        <div class="form-floating mt-2">
+            <input type="password" name="password" class="form-control" placeholder="Your password" required>
+            <label for="floatingPassword">Password</label>
+        </div>
+        <button class="mt-4 w-100 btn btn-lg btn-dark" type="submit" onclick="">Log in</button>
+        <hr class="mt-4">
+        <div class="row mt-4">
+            <a href="/register" class="col text-start">Sign up</a>
+            <a href="/reset-password" class="col text-end">Forget password</a>
+        </div>
+    </form>
+</main>
+<script>
+    event.preventDefault();
+</script>
